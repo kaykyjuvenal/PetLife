@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "br.edu.ifsp.scl.ads.petlifekaykyflaviojuvenal"
+    namespace = "br.edu.ifsp.scl.ads.petlife"
     compileSdk = 34
 
     defaultConfig {
