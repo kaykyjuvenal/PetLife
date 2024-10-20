@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.petlifekaykyflaviojuvenal
+package br.edu.ifsp.scl.ads.petlife
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.petlifekaykyflaviojuvenal
+package br.edu.ifsp.scl.ads.petlife
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
