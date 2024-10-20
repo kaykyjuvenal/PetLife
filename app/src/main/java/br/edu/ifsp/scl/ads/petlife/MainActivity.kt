@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
-
+        amb.salvarPetBt.setOnClickListener {
+            salvarPetNaLista()
+        }
     }
 
     private fun salvarPetNaLista(){
