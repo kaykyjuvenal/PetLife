@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 ultimaIdaVacina
             )
             listaPets.add(novoPet)
+            atualizarListaPets()
             limparCampos()
             Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
         }
@@ -66,5 +67,15 @@ class MainActivity : AppCompatActivity() {
         amb.ultimaIdaPetShopEt.text.clear()
         amb.ultimaIdaVeterinarioEt.text.clear()
         amb.ultimaIdaVacinaEt.text.clear()
+    }
+    private fun atualizarListaPets(){
+        val stringBuilder = StringBuilder()
+        listaPets.forEachIndexed{index, pet -> stringBuilder.append("Pet: ${index + 1}\n" +
+                "Nome: ${pet.nome}\nData de Nascimento: ${pet.dataNascimento}\nTipo: ${pet.tipo}\n" +
+                "Cor: ${pet.cor}\nPorte: ${pet.porte}\nÚltima Ida ao PetShop: ${pet.ultimaIdaPetShop}" +
+                "\nÚltima Ida ao Veterinário: ${pet.ultimaIdaVeterinario}\nÚltima Ida para Vacina: " +
+                "${pet.ultimaIdaVacina}\n\n")
+        }
+        amb.listaPetsTv.text = stringBuilder.toString()
     }
 }
