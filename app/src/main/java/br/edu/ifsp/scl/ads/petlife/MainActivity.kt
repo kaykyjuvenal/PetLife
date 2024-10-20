@@ -53,7 +53,18 @@ class MainActivity : AppCompatActivity() {
                 ultimaIdaVacina
             )
             listaPets.add(novoPet)
+            limparCampos()
             Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun limparCampos(){
+        amb.nomePetEt.text.clear()
+        amb.dataNascimentoEt.text.clear()
+        amb.tipoEt.text.clear()
+        amb.corEt.text.clear()
+        amb.porteEt.text.clear()
+        amb.ultimaIdaPetShopEt.text.clear()
+        amb.ultimaIdaVeterinarioEt.text.clear()
+        amb.ultimaIdaVacinaEt.text.clear()
     }
 }
