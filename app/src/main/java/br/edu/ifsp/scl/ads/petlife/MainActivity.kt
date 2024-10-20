@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val listaPets = mutableListOf<Pet>()
     private lateinit var editarIdaVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editarIdaVacinaLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         }
         amb.editarIdaPetshopBt.setOnClickListener {
             editarIdaPetshop()
+        }
+        amb.editarIdaVacinaBt.setOnClickListener {
+            editarIdaVacina()
         }
         editarIdaVeterinarioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
@@ -59,6 +63,17 @@ class MainActivity : AppCompatActivity() {
                 val novaData = result.data?.getStringExtra("novaDataPetshop")
                 if (nomeCachorro != null && novaData != null){
                     atualizarDataPetshop(nomeCachorro, novaData)
+                }
+            }
+        }
+        editarIdaVacinaLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val nomeCachorro = result.data?.getStringExtra("nomeCachorro")
+                val novaData = result.data?.getStringExtra("novaDataVacina")
+                if (nomeCachorro != null && novaData != null) {
+                    atualizarDataVacina(nomeCachorro, novaData)
                 }
             }
         }
@@ -136,6 +151,18 @@ class MainActivity : AppCompatActivity() {
             it.ultimaIdaPetShop = novaData
             atualizarListaPets()
             Toast.makeText(this, "Data de ida ao Petshop atualizada!", Toast.LENGTH_SHORT).show()
+        } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
+    }
+    private fun editarIdaVacina(){
+        val intent = Intent(this, EditarIdaParaVacinaActivity::class.java)
+        editarIdaVacinaLauncher.launch(intent)
+    }
+    private fun atualizarDataVacina(nomeCachorro: String, novaData: String) {
+        val pet = listaPets.find { it.nome == nomeCachorro }
+        pet?.let {
+            it.ultimaIdaVacina = novaData
+            atualizarListaPets()
+            Toast.makeText(this, "Data de ida para vacina atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
 }
