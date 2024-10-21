@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Campo para inserir o nome do cachorro -->
         <EditText
             android:id="@+id/nomeCachorroEt"
             android:layout_width="match_parent"
@@ -25,7 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
 
-        <!-- Campo para inserir a nova data de vacinação -->
         <EditText
             android:id="@+id/dataVacinaEt"
             android:layout_width="match_parent"
