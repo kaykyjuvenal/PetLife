@@ -15,12 +15,12 @@ class EditarIdaParaVacinaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.salvarBt.setOnClickListener {
-            val nomeCachorro = binding.nomePetEt.text.toString()
+            val nomePet = binding.nomePetEt.text.toString()
             val novaData = binding.dataVacinaEt.text.toString()
 
-            if (nomeCachorro.isNotEmpty() && novaData.isNotEmpty()) {
+            if (nomePet.isNotEmpty() && novaData.isNotEmpty()) {
                 val resultIntent = intent.apply {
-                    putExtra("nome", nomeCachorro)
+                    putExtra("nomePet", nomePet)
                     putExtra("novaDataVacina", novaData)
                 }
                 setResult(Activity.RESULT_OK, resultIntent)

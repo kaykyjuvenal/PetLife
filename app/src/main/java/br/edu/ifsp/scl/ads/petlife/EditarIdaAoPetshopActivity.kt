@@ -16,12 +16,12 @@ class EditarIdaAoPetshopActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.salvarBt.setOnClickListener {
-            val nomeCachorro = binding.nomePetEt.text.toString()
+            val nomePet = binding.nomePetEt.text.toString()
             val novaData = binding.dataPetshopEt.text.toString()
 
-            if (nomeCachorro.isNotEmpty() && novaData.isNotEmpty()) {
+            if (nomePet.isNotEmpty() && novaData.isNotEmpty()) {
                 val resultIntent = intent.apply {
-                    putExtra("nomePet", nomeCachorro)
+                    putExtra("nomePet", nomePet)
                     putExtra("novaDataPetshop", novaData)
                 }
                 setResult(Activity.RESULT_OK, resultIntent)

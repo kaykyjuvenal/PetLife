@@ -15,7 +15,7 @@
             android:id="@+id/nomePetEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome do Cachorro"
+            android:hint="Nome do Pet"
             android:inputType="text"
             android:padding="5dp"
             android:layout_marginBottom="16dp"

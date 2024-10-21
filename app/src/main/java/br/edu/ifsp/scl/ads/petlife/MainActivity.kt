@@ -3,18 +3,17 @@ package br.edu.ifsp.scl.ads.petlife
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
 
 data class Pet(
-    val nome: String,
-    val dataNascimento: String,
-    val tipo: String,
-    val cor: String,
-    val porte: String,
+    var nome: String,
+    var dataNascimento: String,
+    var tipo: String,
+    var cor: String,
+    var porte: String,
     var ultimaIdaPetShop: String,
     var ultimaIdaVeterinario: String,
     var ultimaIdaVacina: String
@@ -27,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editarIdaVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaVacinaLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editarPetLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +44,17 @@ class MainActivity : AppCompatActivity() {
         amb.editarIdaVacinaBt.setOnClickListener {
             editarIdaVacina()
         }
+        amb.editarPetBt.setOnClickListener {
+            editarPet()
+        }
         editarIdaVeterinarioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == RESULT_OK) {
-                val nomecachorro = result.data?.getStringExtra("nomeCachorro")
+                val nomePet = result.data?.getStringExtra("nomePet")
                 val novaData = result.data?.getStringExtra("novaDataVeterinario")
-                if (nomecachorro != null && novaData != null) {
-                    atualizarDataVeterinario(nomecachorro, novaData)
+                if (nomePet != null && novaData != null) {
+                    atualizarDataVeterinario(nomePet, novaData)
                 }
             }
         }
@@ -59,10 +62,10 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ){ result ->
             if (result.resultCode == RESULT_OK){
-                val nomeCachorro = result.data?.getStringExtra("nomeCachorro")
+                val nomePet = result.data?.getStringExtra("nomePet")
                 val novaData = result.data?.getStringExtra("novaDataPetshop")
-                if (nomeCachorro != null && novaData != null){
-                    atualizarDataPetshop(nomeCachorro, novaData)
+                if (nomePet != null && novaData != null){
+                    atualizarDataPetshop(nomePet, novaData)
                 }
             }
         }
@@ -70,10 +73,26 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
-                val nomeCachorro = result.data?.getStringExtra("nomeCachorro")
+                val nomePet = result.data?.getStringExtra("nomePet")
                 val novaData = result.data?.getStringExtra("novaDataVacina")
-                if (nomeCachorro != null && novaData != null) {
-                    atualizarDataVacina(nomeCachorro, novaData)
+                if (nomePet != null && novaData != null) {
+                    atualizarDataVacina(nomePet, novaData)
+                }
+            }
+        }
+        editarPetLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){ result ->
+            if (result.resultCode == RESULT_OK){
+                val nomePet = result.data?.getStringExtra("nomePet")
+                val novoNomePet = result.data?.getStringExtra("novoNomePet")
+                val novaDataNascimento = result.data?.getStringExtra("novaDataNascimento")
+                val novoTipo = result.data?.getStringExtra("novoTipo")
+                val novaCor = result.data?.getStringExtra("novaCor")
+                val novoPorte = result.data?.getStringExtra("novoPorte")
+                if (nomePet != null && novoNomePet != null && novaDataNascimento != null
+                    && novoTipo != null && novaCor != null && novoPorte != null) {
+                    atualizarPet(nomePet, novoNomePet, novaDataNascimento, novoTipo, novaCor, novoPorte)
                 }
             }
         }
@@ -133,8 +152,8 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
         editarIdaVeterinarioLauncher.launch(intent)
     }
-    private fun atualizarDataVeterinario(nomeCachorro: String, novaData: String) {
-        val pet = listaPets.find { it.nome == nomeCachorro }
+    private fun atualizarDataVeterinario(nomePet: String, novaData: String) {
+        val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaVeterinario = novaData
             atualizarListaPets()
@@ -145,8 +164,8 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, EditarIdaAoPetshopActivity::class.java)
         editarIdaPetshopLauncher.launch(intent)
     }
-    private fun atualizarDataPetshop(nomeCachorro: String, novaData: String) {
-        val pet = listaPets.find { it.nome == nomeCachorro }
+    private fun atualizarDataPetshop(nomePet: String, novaData: String) {
+        val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaPetShop = novaData
             atualizarListaPets()
@@ -157,12 +176,30 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, EditarIdaParaVacinaActivity::class.java)
         editarIdaVacinaLauncher.launch(intent)
     }
-    private fun atualizarDataVacina(nomeCachorro: String, novaData: String) {
-        val pet = listaPets.find { it.nome == nomeCachorro }
+    private fun atualizarDataVacina(nomePet: String, novaData: String) {
+        val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaVacina = novaData
             atualizarListaPets()
             Toast.makeText(this, "Data de ida para vacina atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
+    private fun atualizarPet(nomePet: String,novoNomePet : String, novaDataNascimento : String, novoTipo : String,
+                             novaCor : String, novoPorte : String){
+        val pet = listaPets.find { it.nome == nomePet }
+        pet?.let {
+            it.nome = novoNomePet
+            it.dataNascimento = novaDataNascimento
+            it.tipo = novoTipo
+            it.cor = novaCor
+            it.porte = novoPorte
+            atualizarListaPets()
+            Toast.makeText(this, "Pet atualizado!", Toast.LENGTH_SHORT).show()
+        } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
+    }
+    private fun editarPet(){
+        val intent = Intent(this, EditarPetActivity::class.java)
+        editarPetLauncher.launch(intent)
+    }
+
 }

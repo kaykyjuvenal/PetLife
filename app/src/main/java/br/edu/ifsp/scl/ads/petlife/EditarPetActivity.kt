@@ -14,23 +14,22 @@ class EditarPetActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         binding.salvarBt.setOnClickListener {
-            val nomeCachorro = binding.nomePetEt.text.toString()
-            val novoNomeCachorro = binding.novoNomePetEt.text.toString()
-            val novaDataNascimento = binding.novaDataNascimentoEt.text.toString()
+            val nomePet = binding.nomePetEt.text.toString()
+            val novoNomePet = binding.novoNomePetEt.text.toString()
+            val novaData = binding.novaDataNascimentoEt.text.toString()
             val novoTipo = binding.novoTipoEt.text.toString()
             val novaCor = binding.novaCorEt.text.toString()
             val novoPorte = binding.novoPorteEt.text.toString()
 
-            if (nomeCachorro.isNotEmpty() && novoNomeCachorro.isNotEmpty() && novaDataNascimento.isNotEmpty() &&
-                novoTipo.isNotEmpty() && novaCor.isNotEmpty() && novoPorte.isNotEmpty()) {
+
+            if (nomePet.isNotEmpty() && novaData.isNotEmpty()) {
                 val resultIntent = intent.apply {
-                    putExtra("nomeCachorro", nomeCachorro)
-                    putExtra("novoNomeCachorro", novoNomeCachorro)
-                    putExtra("novaDataNascimento", novaDataNascimento)
+                    putExtra("nomePet", nomePet)
+                    putExtra("novoNomePet", novoNomePet)
+                    putExtra("novaDataNascimento", novaData)
                     putExtra("novoTipo", novoTipo)
                     putExtra("novaCor", novaCor)
                     putExtra("novoPorte", novoPorte)
-
                 }
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
