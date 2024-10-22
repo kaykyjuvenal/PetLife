@@ -18,11 +18,16 @@ class EditarIdaAoVeterinarioActivity : AppCompatActivity() {
         binding.salvarBt.setOnClickListener {
             val nomePet = binding.nomePetEt.text.toString()
             val novaData = binding.dataVeterinarioEt.text.toString()
+            val novoTelefone = binding.telefoneConsultorio.text.toString()
+            val novoSite = binding.siteConsultorio.text.toString()
 
-            if (nomePet.isNotEmpty() && novaData.isNotEmpty()) {
+            if (nomePet.isNotEmpty() && novaData.isNotEmpty() && novoTelefone.isNotEmpty()
+                && novoSite.isNotEmpty()) {
                 val resultIntent = intent.apply {
                     putExtra("nomePet", nomePet)
                     putExtra("novaDataVeterinario", novaData)
+                    putExtra("novoTelefoneConsultorio", novoTelefone)
+                    putExtra("novoSiteConsultorio", novoSite)
                 }
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()

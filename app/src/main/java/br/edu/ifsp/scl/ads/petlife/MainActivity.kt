@@ -1,6 +1,13 @@
 package br.edu.ifsp.scl.ads.petlife
 
 import android.content.Intent
+import android.content.Intent.ACTION_CALL
+import android.content.Intent.ACTION_CHOOSER
+import android.content.Intent.ACTION_DIAL
+import android.content.Intent.ACTION_VIEW
+import android.content.Intent.EXTRA_INTENT
+import android.content.Intent.EXTRA_TITLE
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -16,7 +23,9 @@ data class Pet(
     var porte: String,
     var ultimaIdaPetShop: String,
     var ultimaIdaVeterinario: String,
-    var ultimaIdaVacina: String
+    var ultimaIdaVacina: String,
+    var telefoneConsultorio: String,
+    var siteConsultorio: String
 )
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +36,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaVacinaLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarPetLauncher: ActivityResultLauncher<Intent>
+    private lateinit var ligarAoConsultorioLauncher: ActivityResultLauncher<Intent>
+    private lateinit var abrirSiteConsultorioLauncher: ActivityResultLauncher<Intent>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +59,23 @@ class MainActivity : AppCompatActivity() {
         amb.editarPetBt.setOnClickListener {
             editarPet()
         }
+        amb.discarTelefoneconsultorioBt.setOnClickListener{
+            discarPet()
+        }
+        amb.abrirSiteConsultorioBt.setOnClickListener{
+            abrirSitePet()
+        }
+
         editarIdaVeterinarioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == RESULT_OK) {
                 val nomePet = result.data?.getStringExtra("nomePet")
                 val novaData = result.data?.getStringExtra("novaDataVeterinario")
-                if (nomePet != null && novaData != null) {
-                    atualizarDataVeterinario(nomePet, novaData)
+                val novoTelefone = result.data?.getStringExtra("novoTelefoneConsultorio")
+                val novoSite = result.data?.getStringExtra("novoSiteConsultorio")
+                if (nomePet != null && novaData != null && novoTelefone != null && novoSite !=null ) {
+                    atualizarDataVeterinario(nomePet, novaData,novoTelefone,novoSite)
                 }
             }
         }
@@ -96,6 +117,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        ligarAoConsultorioLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){result ->
+            if (result.resultCode == RESULT_OK) {
+                val nomePet = result.data?.getStringExtra("nomePet")
+                if (nomePet != null) {
+                    discarPetConsultorio(nomePet)
+                }
+            }
+        }
+        abrirSiteConsultorioLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val nomePet = result.data?.getStringExtra("nomePet")
+                if (nomePet != null) {
+                    abrirSiteConsultorio(nomePet)
+                }
+            }
+        }
     }
 
     private fun salvarPetNaLista(){
@@ -107,9 +148,12 @@ class MainActivity : AppCompatActivity() {
         val ultimaIdaPetShop = amb.ultimaIdaPetShopEt.text.toString()
         val ultimaIdaVeterinario = amb.ultimaIdaVeterinarioEt.text.toString()
         val ultimaIdaVacina = amb.ultimaIdaVacinaEt.text.toString()
+        val telefoneConsultorio = amb.telefoneConsultorio.text.toString()
+        val siteConsultorio = amb.siteConsultorio.text.toString()
+
         if (nome.isEmpty() || dataNascimento.isEmpty() || tipo.isEmpty() || cor.isEmpty()
             || porte.isEmpty() || ultimaIdaPetShop.isEmpty() || ultimaIdaVeterinario.isEmpty()
-            || ultimaIdaVacina.isEmpty()){
+            || ultimaIdaVacina.isEmpty()|| telefoneConsultorio.isEmpty() || siteConsultorio.isEmpty()){
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()}
             else {
             val novoPet = Pet(
@@ -120,7 +164,9 @@ class MainActivity : AppCompatActivity() {
                 porte,
                 ultimaIdaPetShop,
                 ultimaIdaVeterinario,
-                ultimaIdaVacina
+                ultimaIdaVacina,
+                telefoneConsultorio,
+                siteConsultorio
             )
             listaPets.add(novoPet)
             atualizarListaPets()
@@ -137,6 +183,8 @@ class MainActivity : AppCompatActivity() {
         amb.ultimaIdaPetShopEt.text.clear()
         amb.ultimaIdaVeterinarioEt.text.clear()
         amb.ultimaIdaVacinaEt.text.clear()
+        amb.telefoneConsultorio.text.clear()
+        amb.siteConsultorio.text.clear()
     }
     private fun atualizarListaPets(){
         val stringBuilder = StringBuilder()
@@ -144,7 +192,8 @@ class MainActivity : AppCompatActivity() {
                 "Nome: ${pet.nome}\nData de Nascimento: ${pet.dataNascimento}\nTipo: ${pet.tipo}\n" +
                 "Cor: ${pet.cor}\nPorte: ${pet.porte}\nÚltima Ida ao PetShop: ${pet.ultimaIdaPetShop}" +
                 "\nÚltima Ida ao Veterinário: ${pet.ultimaIdaVeterinario}\nÚltima Ida para Vacina: " +
-                "${pet.ultimaIdaVacina}\n\n")
+                "${pet.ultimaIdaVacina}\nTelefone do consultório:${pet.telefoneConsultorio}\n" +
+                "Site do consultório: ${pet.siteConsultorio}\n\n")
         }
         amb.listaPetsTv.text = stringBuilder.toString()
     }
@@ -152,10 +201,12 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
         editarIdaVeterinarioLauncher.launch(intent)
     }
-    private fun atualizarDataVeterinario(nomePet: String, novaData: String) {
+    private fun atualizarDataVeterinario(nomePet: String, novaData: String, novoTelefone: String, novoSite: String) {
         val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaVeterinario = novaData
+            it.telefoneConsultorio = novoTelefone
+            it.siteConsultorio = novoSite
             atualizarListaPets()
             Toast.makeText(this, "Data de ida ao Veterinario atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
@@ -201,5 +252,38 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, EditarPetActivity::class.java)
         editarPetLauncher.launch(intent)
     }
+    private fun discarPet(){
+        val intent = Intent(this, LigarAoConsultorioActivity::class.java)
+        ligarAoConsultorioLauncher.launch(intent)
+    }
+    private fun abrirSitePet(){
+        val intent = Intent(this, AbrirSiteConsultorioActivity::class.java)
+        abrirSiteConsultorioLauncher.launch(intent)
+    }
+    private fun discarPetConsultorio(nomePet: String){
+        val pet = listaPets.find { it.nome == nomePet }
+        pet?.let {
+            Uri.parse("tel: ${pet.telefoneConsultorio}").let {
+                Intent(if (false) ACTION_CALL else ACTION_DIAL).apply {
+                    data = it
+                    startActivity(this)
+                }
+            }
+        }
+    }
+    private fun abrirSiteConsultorio(nomePet: String){
+        val pet = listaPets.find { it.nome == nomePet }
+        pet?.let {
+            Uri.parse(pet.siteConsultorio).let { url ->
+                Intent(ACTION_VIEW, url).let { navegadorIntent ->
+                    val escolherAppIntent = Intent(ACTION_CHOOSER)
+                    escolherAppIntent.putExtra(EXTRA_TITLE, "Escolha seu navegador")
+                    escolherAppIntent.putExtra(EXTRA_INTENT, navegadorIntent)
+                    startActivity(escolherAppIntent)
+                }
+            }
+        }
+    }
+
 
 }
