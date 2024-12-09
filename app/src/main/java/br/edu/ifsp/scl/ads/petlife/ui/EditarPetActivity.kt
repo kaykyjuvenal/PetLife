@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.app.Activity
 import android.os.Bundle

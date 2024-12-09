@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PetLifeKaykyFlavioJuvenal</string>
     <string name="add_pet">Add Pet\n</string>
+    <string name="nome">Nome</string>
+    <string name="data_de_nascimento">Data de nascimento</string>
+    <string name="porte">Porte</string>
 </resources>

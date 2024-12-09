@@ -1,21 +1,19 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import br.edu.ifsp.scl.ads.petlife.databinding.ActivityAbrirSiteConsultorioBinding
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityLigarAoConsultorioBinding
 
-class AbrirSiteConsultorioActivity :  AppCompatActivity() {
-
-    private lateinit var binding: ActivityAbrirSiteConsultorioBinding
+class LigarAoConsultorioActivity : AppCompatActivity(){
+    private lateinit var binding: ActivityLigarAoConsultorioBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAbrirSiteConsultorioBinding.inflate(layoutInflater)
+        binding = ActivityLigarAoConsultorioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.abrirBt.setOnClickListener {
+        binding.ligarBt.setOnClickListener {
             val nomePet = binding.nomePetEt.text.toString()
 
             if (nomePet.isNotEmpty() ) {

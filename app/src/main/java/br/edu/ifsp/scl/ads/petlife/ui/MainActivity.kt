@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.petlife
+package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.content.Intent
 import android.content.Intent.ACTION_CALL
@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.ifsp.scl.ads.petlife.R
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.ads.petlife.model.Pet
 
@@ -139,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
         R.id.addPetMi -> {
-            barl.launch(Intent(this,AdicionarPetActivity::class.java))
+            barl.launch(Intent(this, AdicionarPetActivity::class.java))
             true
         }
         else ->{

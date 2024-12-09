@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PetLifeKaykyFlavioJuvenal"
         tools:targetApi="31">
         <activity
-            android:name="br.edu.ifsp.scl.ads.petlife.MainActivity"
+            android:name="br.edu.ifsp.scl.ads.petlife.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditarIdaAoVeterinarioActivity" />
-        <activity android:name=".EditarIdaAoPetshopActivity" />
-        <activity android:name=".EditarIdaParaVacinaActivity" />
-        <activity android:name=".EditarPetActivity"/>
-        <activity android:name=".LigarAoConsultorioActivity"/>
-        <activity android:name=".AbrirSiteConsultorioActivity"/>
-        <activity android:name=".AdicionarPetActivity"/>
+        <activity android:name=".ui.EditarIdaAoVeterinarioActivity" />
+        <activity android:name=".ui.EditarIdaAoPetshopActivity" />
+        <activity android:name=".ui.EditarIdaParaVacinaActivity" />
+        <activity android:name=".ui.EditarPetActivity"/>
+        <activity android:name=".ui.LigarAoConsultorioActivity"/>
+        <activity android:name=".ui.AbrirSiteConsultorioActivity"/>
+        <activity android:name=".ui.AdicionarPetActivity"/>
 
     </application>
 

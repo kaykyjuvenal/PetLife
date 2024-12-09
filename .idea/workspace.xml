@@ -45,6 +45,11 @@
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tile_pet.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml">
         <config>
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
@@ -66,16 +71,30 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Constant.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetDAO.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetSqliteImpl.kt" afterDir="false" />
+    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/controller/MainController.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/PetAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/tile_pet.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AbrirSiteConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaAoPetshopActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaAoVeterinarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaParaVacinaActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/LigarAoConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Constant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Constant.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,11 +152,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
         <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -191,6 +210,9 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\negui\Desktop\PetlifeTesteComPedro\PetLife\app\src\main\res\layout" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="br.edu.ifsp.scl.ads.petlife.ui" />
     </key>
   </component>
   <component name="RunManager">
@@ -286,12 +308,21 @@
       <option name="project" value="LOCAL" />
       <updated>1733706566837</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations.">
+      <option name="closed" value="true" />
+      <created>1733710039621</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733710039621</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: start of part 2 development with visual improvements and SQLite implementation.&#10;- Integrated SQLite for improved data management and persistence.&#10;-" />
     <MESSAGE value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
+    <MESSAGE value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
   </component>
 </project>
