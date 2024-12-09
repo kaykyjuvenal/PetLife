@@ -15,4 +15,10 @@
     <item
         android:id="@+id/EditarUltimaIdaParaVacinaMi"
         android:title="Editar última ida para vacina"/>
+    <item
+        android:id="@+id/DiscarTelefoneconsultorioMi"
+        android:title="Discar telefone do consultorio"/>
+    <item
+        android:id="@+id/AbrirSiteConsultorioMi"
+        android:title="Abrir site do consultorio"/>
 </menu>

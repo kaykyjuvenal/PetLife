@@ -18,19 +18,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
+import br.edu.ifsp.scl.ads.petlife.model.Pet
 
-data class Pet(
-    var nome: String,
-    var dataNascimento: String,
-    var tipo: String,
-    var cor: String,
-    var porte: String,
-    var ultimaIdaPetShop: String,
-    var ultimaIdaVeterinario: String,
-    var ultimaIdaVacina: String,
-    var telefoneConsultorio: String,
-    var siteConsultorio: String
-)
 
 class MainActivity : AppCompatActivity() {
 
