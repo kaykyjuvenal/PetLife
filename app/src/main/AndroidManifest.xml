@@ -27,6 +27,7 @@
         <activity android:name=".EditarPetActivity"/>
         <activity android:name=".LigarAoConsultorioActivity"/>
         <activity android:name=".AbrirSiteConsultorioActivity"/>
+        <activity android:name=".AdicionarPetActivity"/>
 
     </application>
 

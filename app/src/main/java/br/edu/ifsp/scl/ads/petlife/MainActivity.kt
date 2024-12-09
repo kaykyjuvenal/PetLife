@@ -9,6 +9,10 @@ import android.content.Intent.EXTRA_INTENT
 import android.content.Intent.EXTRA_TITLE
 import android.net.Uri
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var amb: ActivityMainBinding
     private val listaPets = mutableListOf<Pet>()
+    private lateinit var barl: ActivityResultLauncher<Intent>
     private lateinit var editarIdaVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaVacinaLauncher: ActivityResultLauncher<Intent>
@@ -44,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
-        amb.salvarPetBt.setOnClickListener {
-           salvarPetNaLista()
-        }
+        //amb.salvarPetBt.setOnClickListener {
+           //salvarPetNaLista()
+        //}'
         amb.editarIdaVeterinarioBt.setOnClickListener {
            editarIdaVeterinario()
         }
@@ -138,65 +143,29 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
 
-    private fun salvarPetNaLista(){
-        val nome = amb.nomePetEt.text.toString()
-        val dataNascimento = amb.dataNascimentoEt.text.toString()
-        val tipo = amb.tipoEt.text.toString()
-        val cor = amb.corEt.text.toString()
-        val porte = amb.porteEt.text.toString()
-        val ultimaIdaPetShop = amb.ultimaIdaPetShopEt.text.toString()
-        val ultimaIdaVeterinario = amb.ultimaIdaVeterinarioEt.text.toString()
-        val ultimaIdaVacina = amb.ultimaIdaVacinaEt.text.toString()
-        val telefoneConsultorio = amb.telefoneConsultorio.text.toString()
-        val siteConsultorio = amb.siteConsultorio.text.toString()
-
-        if (nome.isEmpty() || dataNascimento.isEmpty() || tipo.isEmpty() || cor.isEmpty()
-            || porte.isEmpty() || ultimaIdaPetShop.isEmpty() || ultimaIdaVeterinario.isEmpty()
-            || ultimaIdaVacina.isEmpty()|| telefoneConsultorio.isEmpty() || siteConsultorio.isEmpty()){
-            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()}
-            else {
-            val novoPet = Pet(
-                nome,
-                dataNascimento,
-                tipo,
-                cor,
-                porte,
-                ultimaIdaPetShop,
-                ultimaIdaVeterinario,
-                ultimaIdaVacina,
-                telefoneConsultorio,
-                siteConsultorio
-            )
-            listaPets.add(novoPet)
-            atualizarListaPets()
-            limparCampos()
-            Toast.makeText(this, "Pet cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
+    override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
+        R.id.addPetMi -> {
+            barl.launch(Intent(this,AdicionarPetActivity::class.java))
+            true
+        }
+        else ->{
+            false
         }
     }
-    private fun limparCampos(){
-        amb.nomePetEt.text.clear()
-        amb.dataNascimentoEt.text.clear()
-        amb.tipoEt.text.clear()
-        amb.corEt.text.clear()
-        amb.porteEt.text.clear()
-        amb.ultimaIdaPetShopEt.text.clear()
-        amb.ultimaIdaVeterinarioEt.text.clear()
-        amb.ultimaIdaVacinaEt.text.clear()
-        amb.telefoneConsultorio.text.clear()
-        amb.siteConsultorio.text.clear()
-    }
-    private fun atualizarListaPets(){
-        val stringBuilder = StringBuilder()
-        listaPets.forEachIndexed{index, pet -> stringBuilder.append("Pet: ${index + 1}\n" +
-                "Nome: ${pet.nome}\nData de Nascimento: ${pet.dataNascimento}\nTipo: ${pet.tipo}\n" +
-                "Cor: ${pet.cor}\nPorte: ${pet.porte}\nÚltima Ida ao PetShop: ${pet.ultimaIdaPetShop}" +
-                "\nÚltima Ida ao Veterinário: ${pet.ultimaIdaVeterinario}\nÚltima Ida para Vacina: " +
-                "${pet.ultimaIdaVacina}\nTelefone do consultório:${pet.telefoneConsultorio}\n" +
-                "Site do consultório: ${pet.siteConsultorio}\n\n")
-        }
-        amb.listaPetsTv.text = stringBuilder.toString()
-    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) = menuInflater.inflate(R.menu.context_menu_main,menu)
+
+
+
     private fun editarIdaVeterinario() {
         val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
         editarIdaVeterinarioLauncher.launch(intent)
@@ -207,7 +176,7 @@ class MainActivity : AppCompatActivity() {
             it.ultimaIdaVeterinario = novaData
             it.telefoneConsultorio = novoTelefone
             it.siteConsultorio = novoSite
-            atualizarListaPets()
+            //Atualizar no banco
             Toast.makeText(this, "Data de ida ao Veterinario atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
@@ -219,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaPetShop = novaData
-            atualizarListaPets()
+            //Atualizar no banco
             Toast.makeText(this, "Data de ida ao Petshop atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
@@ -231,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         val pet = listaPets.find { it.nome == nomePet }
         pet?.let {
             it.ultimaIdaVacina = novaData
-            atualizarListaPets()
+            //Atualizar no banco
             Toast.makeText(this, "Data de ida para vacina atualizada!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
@@ -244,7 +213,7 @@ class MainActivity : AppCompatActivity() {
             it.tipo = novoTipo
             it.cor = novaCor
             it.porte = novoPorte
-            atualizarListaPets()
+            //atualiza o banco
             Toast.makeText(this, "Pet atualizado!", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
@@ -284,6 +253,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 }

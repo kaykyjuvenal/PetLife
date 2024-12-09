@@ -45,21 +45,40 @@
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AdicionarPetActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/add_pet_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/toolbar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AdicionarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,14 +136,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="Kotlin Class" />
+        <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "kaykyjuvenal"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kaykyjuvenal/PetLife.git",
+    "accountId": "1910a2df-2dc7-42de-8e03-c7f635c1644f"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -146,7 +178,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/negui/Desktop/PetlifeTesteComPedro/PetLife",
+    "last_opened_file_path": "C:/Users/negui/Desktop/ProjetoPedro/BooksPdm-2024-2-master",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2"
@@ -157,6 +189,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\negui\Desktop\PetlifeTesteComPedro\PetLife\app\src\main\res\layout" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="PetLifeKaykyFlavioJuvenal.app.main" />
@@ -234,6 +271,20 @@
       <option name="presentableId" value="Default" />
       <updated>1729448363701</updated>
     </task>
+    <task id="LOCAL-00001" summary="feat: start of part 2 development with visual improvements and SQLite implementation.&#10;- Integrated SQLite for improved data management and persistence.&#10;-">
+      <option name="closed" value="true" />
+      <created>1733699261293</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733699261293</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: start of part 2 development with visual improvements and SQLite implementation.&#10;- Integrated SQLite for improved data management and persistence.&#10;-" />
+    <MESSAGE value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
   </component>
 </project>
