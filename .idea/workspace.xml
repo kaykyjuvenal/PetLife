@@ -71,28 +71,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/controller/MainController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/PetAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/tile_pet.xml" afterDir="false" />
+    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: implement AdicionarPetActivity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AbrirSiteConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaAoPetshopActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaAoVeterinarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarIdaParaVacinaActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/EditarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/LigarAoConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Constant.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Constant.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
@@ -163,18 +148,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "kaykyjuvenal"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kaykyjuvenal&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kaykyjuvenal/PetLife.git",
-    "accountId": "1910a2df-2dc7-42de-8e03-c7f635c1644f"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kaykyjuvenal/PetLife.git&quot;,
+    &quot;accountId&quot;: &quot;1910a2df-2dc7-42de-8e03-c7f635c1644f&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -186,27 +171,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/negui/Desktop/ProjetoPedro/BooksPdm-2024-2-master",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/negui/Desktop/ProjetoPedro/BooksPdm-2024-2-master&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   },
-  "keyToStringList": {
-    "kotlin-gradle-user-dirs": [
-      "C:\\Users\\negui\\.gradle"
+  &quot;keyToStringList&quot;: {
+    &quot;kotlin-gradle-user-dirs&quot;: [
+      &quot;C:\\Users\\negui\\.gradle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\negui\Desktop\PetlifeTesteComPedro\PetLife\app\src\main\res\layout" />
@@ -316,13 +301,22 @@
       <option name="project" value="LOCAL" />
       <updated>1733710039621</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: implement AdicionarPetActivity">
+      <option name="closed" value="true" />
+      <created>1733713946146</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733713946146</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: start of part 2 development with visual improvements and SQLite implementation.&#10;- Integrated SQLite for improved data management and persistence.&#10;-" />
     <MESSAGE value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
     <MESSAGE value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
+    <MESSAGE value="feat: implement AdicionarPetActivity" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: implement AdicionarPetActivity" />
   </component>
 </project>

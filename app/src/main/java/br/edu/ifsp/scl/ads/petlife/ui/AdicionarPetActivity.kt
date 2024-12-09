@@ -6,6 +6,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import br.edu.ifsp.scl.ads.petlife.R
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityAdicionarPetBinding
 import br.edu.ifsp.scl.ads.petlife.model.Constant
 import br.edu.ifsp.scl.ads.petlife.model.Constant.PET
@@ -20,7 +22,8 @@ class AdicionarPetActivity :  AppCompatActivity() {
         binding = ActivityAdicionarPetBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val viewMode = intent.getBooleanExtra(VIEW_MODE,false)
-
+        val toolbar : Toolbar = findViewById(R.id.toolbarIn)
+        setSupportActionBar(toolbar)
         val receivedPet = intent.getParcelableExtra<Pet>(PET)
         receivedPet?.let { pet ->
             with(binding) {
@@ -75,25 +78,12 @@ class AdicionarPetActivity :  AppCompatActivity() {
                     siteConsultorioEt.text.toString()
                 ).let { pet ->
                     Intent().apply {
-                        putExtra(Constant.PET, pet)
+                        putExtra(PET, pet)
                         setResult(RESULT_OK, this)
                         finish()
-                        limparCampos()
                     }
                 }
             }
         }
-    }
-    private fun limparCampos(){
-        binding.nomePetEt.text.clear()
-        binding.dataNascimentoEt.text.clear()
-        binding.tipoEt.text.clear()
-        binding.corEt.text.clear()
-        binding.porteEt.text.clear()
-        binding.ultimaIdaPetShopEt.text.clear()
-        binding.ultimaIdaVeterinarioEt.text.clear()
-        binding.ultimaIdaVacinaEt.text.clear()
-        binding.telefoneConsultorioEt.text.clear()
-        binding.siteConsultorioEt.text.clear()
     }
 }

@@ -1,11 +1,18 @@
 package br.edu.ifsp.scl.ads.petlife.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityEditarPetBinding
+import br.edu.ifsp.scl.ads.petlife.model.Constant.PET
+import br.edu.ifsp.scl.ads.petlife.model.Constant.VIEW_MODE
+import br.edu.ifsp.scl.ads.petlife.model.Pet
 
-class EditarPetActivity : AppCompatActivity(){
+class EditarPetActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditarPetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,28 +20,53 @@ class EditarPetActivity : AppCompatActivity(){
         binding = ActivityEditarPetBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.salvarBt.setOnClickListener {
-            val nomePet = binding.nomePetEt.text.toString()
-            val novoNomePet = binding.novoNomePetEt.text.toString()
-            val novaData = binding.novaDataNascimentoEt.text.toString()
-            val novoTipo = binding.novoTipoEt.text.toString()
-            val novaCor = binding.novaCorEt.text.toString()
-            val novoPorte = binding.novoPorteEt.text.toString()
+        val viewMode = intent.getBooleanExtra(VIEW_MODE, false)
+        val receivedPet = intent.getParcelableExtra<Pet>(PET)
+        val position = intent.getIntExtra("position",-1)
 
+        if(receivedPet != null && position != -1){
+            receivedPet?.let { pet ->
+                with(binding) {
+                    with(pet) {
+                        novaDataNascimentoEt.setText(dataNascimento)
+                        novoTipoEt.setText(tipo)
+                        novaCorEt.setText(cor)
+                        novoPorteEt.setText(porte)
 
-            if (nomePet.isNotEmpty() && novaData.isNotEmpty()) {
-                val resultIntent = intent.apply {
-                    putExtra("nomePet", nomePet)
-                    putExtra("novoNomePet", novoNomePet)
-                    putExtra("novaDataNascimento", novaData)
-                    putExtra("novoTipo", novoTipo)
-                    putExtra("novaCor", novaCor)
-                    putExtra("novoPorte", novoPorte)
+                        novaDataNascimentoEt.isEnabled = !viewMode
+                        novoTipoEt.isEnabled = !viewMode
+                        novaCorEt.isEnabled = !viewMode
+                        novoPorteEt.isEnabled = !viewMode
+                        salvarBt.visibility = if (viewMode) GONE else VISIBLE
+                    }
                 }
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
+            }
+
+        }
+
+        binding.toolbarIn.toolbar.let {
+            it.subtitle = "Edit pet"
+            setSupportActionBar(it)
+        }
+        binding.run {
+            binding.salvarBt.setOnClickListener {
+                if (receivedPet != null) {
+                    Pet(
+                        receivedPet.nome,
+                        novaDataNascimentoEt.text.toString(),
+                        novoTipoEt.text.toString(),
+                        novaCorEt.text.toString(),
+                        novoPorteEt.text.toString()
+                    ).let { pet ->
+                        Intent().apply {
+                            putExtra(PET, pet)
+                            putExtra("position",position)
+                            setResult(RESULT_OK, this)
+                            finish()
+                        }
+                    }
+                }
             }
         }
     }
-
 }

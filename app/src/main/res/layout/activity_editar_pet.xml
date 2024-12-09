@@ -11,31 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
-
-        <EditText
-            android:id="@+id/nomePetEt"
+        <include
+            android:id="@+id/toolbarIn"
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome do Pet"
-            android:inputType="text"
-            android:padding="5dp"
-            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints" />
-
-        <EditText
-            android:id="@+id/novoNomePetEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Novo nome para o animal"
-            android:inputType="text"
-            android:padding="5dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/nomePetEt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintEnd_toEndOf="parent" />
         <EditText
             android:id="@+id/novaDataNascimentoEt"
             android:layout_width="match_parent"
@@ -44,7 +27,7 @@
             android:inputType="text"
             android:padding="5dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/novoNomePetEt"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarIn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
