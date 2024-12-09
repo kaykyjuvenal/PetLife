@@ -31,7 +31,7 @@ import br.edu.ifsp.scl.ads.petlife.model.Pet
 class MainActivity : AppCompatActivity() {
 
     private lateinit var amb: ActivityMainBinding
-    private val listaPets = mutableListOf<Pet>()
+    private val petsList = mutableListOf<Pet>()
     private lateinit var adicionarPetLauncher : ActivityResultLauncher<Intent>
     private lateinit var editarIdaVeterinarioLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var abrirSiteConsultorioLauncher: ActivityResultLauncher<Intent>
 
     private val petAdapter: PetAdapter by lazy{
-        PetAdapter(this,listaPets)
+        PetAdapter(this,petsList)
     }
     private val mainController: MainController by lazy{
         MainController(this)
@@ -51,8 +51,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         amb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(amb.root)
-        val toolbar : Toolbar = findViewById(R.id.toolbarIn)
+        val toolbar: Toolbar = findViewById(R.id.toolbarIn)
         setSupportActionBar(toolbar)
+
+
+
+        amb.toolbarIn.toolbar.let {
+            it.subtitle = getString(R.string.pet_list)
+            setSupportActionBar(it)
+        }
+
+        fillPetList()
+
+        amb.petsLV.adapter = petAdapter
+
+        amb.petsLV.setOnItemClickListener { _, _, position, _ ->
+            Intent(this, AdicionarPetActivity::class.java).apply {
+                putExtra(PET, petsList[position])
+                putExtra(VIEW_MODE, true)
+                startActivity(this)
+            }
+        }
+
+        registerForContextMenu(amb.petsLV)
 
         adicionarPetLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -62,80 +83,40 @@ class MainActivity : AppCompatActivity() {
                 else {
                     result.data?.getParcelableExtra(PET, Pet::class.java)
                 }
-                pet?.let{ receivedPet ->
-                    val position = listaPets.indexOfFirst { it.nome == receivedPet.nome }
-                    if (position == -1) {
-                        listaPets.add(receivedPet)
-                        mainController.insertPet(receivedPet)
-                    }
-                    else {
-                        listaPets[position] = receivedPet
-                        mainController.modifyPet(receivedPet)
-                    }
-                    petAdapter.notifyDataSetChanged()
+                if (pet != null) {
+                    adicionarPet(pet)
                 }
             }
         }
-
-        amb.toolbarIn.toolbar.let {
-            it.subtitle = getString(R.string.pet_list)
-            setSupportActionBar(it)
-        }
-
-        amb.petsLV.adapter = petAdapter
-
-        amb.petsLV.setOnItemClickListener { _, _, position, _ ->
-            Intent(this, AdicionarPetActivity::class.java).apply {
-                putExtra(PET, listaPets[position])
-                putExtra(VIEW_MODE, true)
-                startActivity(this)
-            }
-        }
-
-        registerForContextMenu(amb.petsLV)
-        //amb.salvarPetBt.setOnClickListener {
-           //salvarPetNaLista()
-        //}'
-        //amb.editarIdaVeterinarioBt.setOnClickListener {
-           //editarIdaVeterinario()
-        //}
-        //amb.editarIdaPetshopBt.setOnClickListener {
-            //editarIdaPetshop()
-        //}
-        //amb.editarIdaVacinaBt.setOnClickListener {
-            //editarIdaVacina()
-        //}
-        //amb.editarPetBt.setOnClickListener {
-          //  editarPet()
-        //}
-        //amb.discarTelefoneconsultorioBt.setOnClickListener{
-            //discarPet()
-        //}
-        //amb.abrirSiteConsultorioBt.setOnClickListener{
-            //abrirSitePet()
-        //}
 
         editarIdaVeterinarioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         { result ->
             if (result.resultCode == RESULT_OK) {
-                val nomePet = result.data?.getStringExtra("nomePet")
-                val novaData = result.data?.getStringExtra("novaDataVeterinario")
-                val novoTelefone = result.data?.getStringExtra("novoTelefoneConsultorio")
-                val novoSite = result.data?.getStringExtra("novoSiteConsultorio")
-                if (nomePet != null && novaData != null && novoTelefone != null && novoSite !=null ) {
-                    //atualizarDataVeterinario(nomePet, novaData,novoTelefone,novoSite)
+                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Pet>(PET)
+                }
+                else {
+                    result.data?.getParcelableExtra(PET, Pet::class.java)
+                }
+                if (pet != null) {
+                    atualizarPet(pet)
                 }
             }
+
         }
         editarIdaPetshopLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){ result ->
-            if (result.resultCode == RESULT_OK){
-                val nomePet = result.data?.getStringExtra("nomePet")
-                val novaData = result.data?.getStringExtra("novaDataPetshop")
-                if (nomePet != null && novaData != null){
-                    //atualizarDataPetshop(nomePet, novaData)
+            if (result.resultCode == RESULT_OK) {
+                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Pet>(PET)
+                }
+                else {
+                    result.data?.getParcelableExtra(PET, Pet::class.java)
+                }
+                if (pet != null) {
+                    atualizarPet(pet)
                 }
             }
         }
@@ -143,30 +124,44 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
-                val nomePet = result.data?.getStringExtra("nomePet")
-                val novaData = result.data?.getStringExtra("novaDataVacina")
-                if (nomePet != null && novaData != null) {
-                    //atualizarDataVacina(nomePet, novaData)
+                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Pet>(PET)
+                }
+                else {
+                    result.data?.getParcelableExtra(PET, Pet::class.java)
+                }
+                if (pet != null) {
+                    atualizarPet(pet)
                 }
             }
         }
         editarPetLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()
         ){ result ->
-            if (result.resultCode == RESULT_OK){
-                val newPet: Pet? = result.data?.getParcelableExtra(PET)
+            if (result.resultCode == RESULT_OK) {
                 val position = result.data?.getIntExtra("position", -1)
-                if (newPet != null && position != null) {
-                        atualizarPet(position,newPet);
-                    }
+
+                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Pet>(PET)
+
                 }
+                else {
+                    result.data?.getParcelableExtra(PET, Pet::class.java)
+                }
+                if (pet != null && position != null) {
+                    atualizarPet(pet)
+                }
+            }
         }
         ligarAoConsultorioLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){result ->
             if (result.resultCode == RESULT_OK) {
-                val nomePet = result.data?.getStringExtra("nomePet")
-                if (nomePet != null) {
-                    discarPetConsultorio(nomePet)
+                if (result.resultCode == RESULT_OK) {
+                    val position = result.data?.getIntExtra("position", -1)
+
+                    if (position != null) {
+                        discarPetConsultorio(position)
+                    }
                 }
             }
         }
@@ -174,13 +169,20 @@ class MainActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
-                val nomePet = result.data?.getStringExtra("nomePet")
-                if (nomePet != null) {
-                    abrirSiteConsultorio(nomePet)
+                val position = result.data?.getIntExtra("position", -1)
+                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Pet>(PET)
+                } else {
+                    result.data?.getParcelableExtra(PET, Pet::class.java)
+                }
+                if (pet != null && position != null) {
+                    abrirSiteConsultorio(position)
                 }
             }
         }
     }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -209,7 +211,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.editarPetMi -> {
                 Intent(this, EditarPetActivity::class.java).apply {
-                    putExtra(PET, listaPets[position])
+                    putExtra(PET, petsList[position])
                     putExtra("position",position)
                     putExtra(VIEW_MODE, false)
                     editarPetLauncher.launch(this)
@@ -219,9 +221,50 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.excluirPetMi -> {
-                mainController.removePet(listaPets[position].nome)
-                listaPets.removeAt(position)
+                mainController.removePet(petsList[position].nome)
+                petsList.removeAt(position)
                 petAdapter.notifyDataSetChanged()
+                true
+            }
+            R.id.DiscarTelefoneconsultorioMi -> {
+                Intent(this, LigarAoConsultorioActivity::class.java).apply {
+                    putExtra("position",position)
+                    ligarAoConsultorioLauncher.launch(this)
+                }
+                true
+            }
+            R.id.AbrirSiteConsultorioMi->{
+                Intent(this, AbrirSiteConsultorioActivity::class.java).apply {
+                    putExtra("position",position)
+                    abrirSiteConsultorioLauncher.launch(this)
+                }
+                true
+            }
+            R.id.EditarUltimaIdaAoPetshopMI ->{
+                Intent(this, EditarIdaAoPetshopActivity::class.java).apply {
+                    putExtra(PET, petsList[position])
+                    putExtra("position",position)
+                    putExtra(VIEW_MODE, false)
+                    editarPetLauncher.launch(this)
+                }
+                true
+            }
+            R.id.EditarUltimaIdaParaVacinaMi ->{
+                Intent(this,EditarIdaParaVacinaActivity::class.java).apply {
+                    putExtra(PET, petsList[position])
+                    putExtra("position",position)
+                    putExtra(VIEW_MODE, false)
+                    editarPetLauncher.launch(this)
+                }
+                true
+            }
+            R.id.EditarUltimaIdaAoVeterinarioMi ->{
+                Intent(this,EditarIdaAoVeterinarioActivity::class.java).apply {
+                    putExtra(PET, petsList[position])
+                    putExtra("position",position)
+                    putExtra(VIEW_MODE, false)
+                    editarPetLauncher.launch(this)
+                }
                 true
             }
 
@@ -231,27 +274,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun adicionarPet(pet: Pet?) {
+        pet?.let { receivedPet ->
+            val position = petsList.indexOfFirst { it.nome == receivedPet.nome }
+            if (position == -1) {
+                petsList.add(receivedPet)
+                mainController.insertPet(receivedPet)
+            } else {
+                petsList[position] = receivedPet
+                mainController.modifyPet(receivedPet)
+            }
+            petAdapter.notifyDataSetChanged()
+        }
+    }
+
 
     private fun editarIdaVeterinario() {
-        val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
-        editarIdaVeterinarioLauncher.launch(intent)
+        //val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
+        //editarIdaVeterinarioLauncher.launch(intent)
     }
-    //private fun atualizarDataVeterinario(nomePet: String, novaData: String, novoTelefone: String, novoSite: String) {
-      //  val pet = listaPets.find { it.nome == nomePet }
-        //pet?.let {
-          //  it.ultimaIdaVeterinario = novaData
-            //it.telefoneConsultorio = novoTelefone
-            //it.siteConsultorio = novoSite
-            //Atualizar no banco
-            //Toast.makeText(this, "Data de ida ao Veterinario atualizada!", Toast.LENGTH_SHORT).show()
-        //} ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
-    //}
+
     //private fun editarIdaPetshop(){
       //  val intent = Intent(this, EditarIdaAoPetshopActivity::class.java)
         //editarIdaPetshopLauncher.launch(intent)
     //}
     //private fun atualizarDataPetshop(nomePet: String, novaData: String) {
-       // val pet = listaPets.find { it.nome == nomePet }
+       // val pet = petsList.find { it.nome == nomePet }
         //pet?.let {
           //  it.ultimaIdaPetShop = novaData
             //Atualizar no banco
@@ -262,36 +310,21 @@ class MainActivity : AppCompatActivity() {
       //  val intent = Intent(this, EditarIdaParaVacinaActivity::class.java)
         //editarIdaVacinaLauncher.launch(intent)
     //}
-    //private fun atualizarDataVacina(nomePet: String, novaData: String) {
-      //  val pet = listaPets.find { it.nome == nomePet }
-        //pet?.let {
-          //  it.ultimaIdaVacina = novaData
-            //Atualizar no banco
-            //Toast.makeText(this, "Data de ida para vacina atualizada!", Toast.LENGTH_SHORT).show()
-       // } ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
-    //}
-    private fun atualizarPet(position: Int,pet:Pet){
+
+    private fun atualizarPet(pet:Pet){
         pet?.let {
-            listaPets[position] = pet
+            val position = petsList.indexOfFirst { it.nome == pet.nome }
+            petsList[position] = pet
             //atualiza o banco
             mainController.modifyPet(pet)
             Toast.makeText(this, "Pet atualizado!", Toast.LENGTH_SHORT).show()
         }?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
-    private fun editarPet(){
-        val intent = Intent(this, EditarPetActivity::class.java)
-        editarPetLauncher.launch(intent)
-    }
-    private fun discarPet(){
-        val intent = Intent(this, LigarAoConsultorioActivity::class.java)
-        ligarAoConsultorioLauncher.launch(intent)
-    }
-    private fun abrirSitePet(){
-        val intent = Intent(this, AbrirSiteConsultorioActivity::class.java)
-        abrirSiteConsultorioLauncher.launch(intent)
-    }
-    private fun discarPetConsultorio(nomePet: String){
-        val pet = listaPets.find { it.nome == nomePet }
+
+    private fun discarPetConsultorio(position: Int){
+
+        val pet = petsList[position]
+
         pet?.let {
             Uri.parse("tel: ${pet.telefoneConsultorio}").let {
                 Intent(if (false) ACTION_CALL else ACTION_DIAL).apply {
@@ -301,8 +334,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun abrirSiteConsultorio(nomePet: String){
-        val pet = listaPets.find { it.nome == nomePet }
+    private fun abrirSiteConsultorio(position: Int){
+        val pet = petsList[position]
         pet?.let {
             Uri.parse(pet.siteConsultorio).let { url ->
                 Intent(ACTION_VIEW, url).let { navegadorIntent ->
@@ -313,6 +346,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun fillPetList(){
+        Thread{
+            runOnUiThread{
+                petsList.clear()
+                petsList.addAll(mainController.getPets())
+                petAdapter.notifyDataSetChanged()
+            }
+        }.start()
     }
 
 

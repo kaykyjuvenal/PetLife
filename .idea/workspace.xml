@@ -71,15 +71,20 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: implement AdicionarPetActivity">
+    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: finalize pet addition and edit functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_pet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733713946146</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: finalize pet addition and edit functionality">
+      <option name="closed" value="true" />
+      <created>1733767155523</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733767155523</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -317,6 +330,7 @@
     <MESSAGE value="feat: add toolbar and configure menu and floating menu in XML&#10;&#10;Implemented the toolbar in the layout.&#10;- Configured the menu and floating menu options in the XML files for better navigation and user experience." />
     <MESSAGE value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
     <MESSAGE value="feat: implement AdicionarPetActivity" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: implement AdicionarPetActivity" />
+    <MESSAGE value="feat: finalize pet addition and edit functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finalize pet addition and edit functionality" />
   </component>
 </project>

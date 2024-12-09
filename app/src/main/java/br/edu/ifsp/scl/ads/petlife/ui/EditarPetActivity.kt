@@ -56,7 +56,12 @@ class EditarPetActivity : AppCompatActivity() {
                         novaDataNascimentoEt.text.toString(),
                         novoTipoEt.text.toString(),
                         novaCorEt.text.toString(),
-                        novoPorteEt.text.toString()
+                        novoPorteEt.text.toString(),
+                        receivedPet.ultimaIdaPetShop,
+                        receivedPet.ultimaIdaVeterinario,
+                        receivedPet.ultimaIdaVacina,
+                        receivedPet.telefoneConsultorio,
+                        receivedPet.siteConsultorio
                     ).let { pet ->
                         Intent().apply {
                             putExtra(PET, pet)
