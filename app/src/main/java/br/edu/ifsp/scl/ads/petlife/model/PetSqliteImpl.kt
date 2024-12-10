@@ -16,11 +16,8 @@ class PetSqliteImpl(context: Context) : PetDAO {
         private const val TIPO_COLUMN = "tipo"
         private const val COR_COLUMN = "cor"
         private const val PORTE_COLUMN = "porte"
-        private const val ULTIMA_DATA_PETSHOP_COLUMN = "ultimaIdaPetShop"
-        private const val ULTIMA_DATA_VETERINARIO_COLUMN = "ultimaIdaVeterinario"
-        private const val ULTIMA_DATA_VACINA_COLUMN = "ultimaIdaVacina"
-        private const val TELEFONE_CONSULTORIO_COLUMN = "telefoneConsultorio"
-        private const val SITE_CONSULTORIO_COLUMN = "siteConsultorio"
+        private const val EVENTOS_COLUMN = "datasDeEventos"
+
 
         private const val CREATE_PET_TABLE_STATEMENT =
             "CREATE TABLE IF NOT EXISTS $PET_TABLE (" +
@@ -29,11 +26,7 @@ class PetSqliteImpl(context: Context) : PetDAO {
                     "$TIPO_COLUMN TEXT NOT NULL," +
                     "$COR_COLUMN TEXT NOT NULL," +
                     "$PORTE_COLUMN TEXT NOT NULL," +
-                    "$ULTIMA_DATA_PETSHOP_COLUMN TEXT NOT NULL," +
-                    "$ULTIMA_DATA_VETERINARIO_COLUMN TEXT NOT NULL," +
-                    "$ULTIMA_DATA_VACINA_COLUMN TEXT NOT NULL," +
-                    "$TELEFONE_CONSULTORIO_COLUMN TEXT NOT NULL," +
-                    "$SITE_CONSULTORIO_COLUMN TEXT NOT NULL)"
+                    "$EVENTOS_COLUMN TEXT NOT NULL)"
     }
 
     private val petDatabase: SQLiteDatabase = context.openOrCreateDatabase(
@@ -89,6 +82,15 @@ class PetSqliteImpl(context: Context) : PetDAO {
 
         return petsList
     }
+    override fun retrieveEventos(): MutableList<String> {
+        val eventosList = mutableListOf<String>()
+        val cursor = petDatabase.rawQuery("SELECT datasDeEventos FROM $PET_TABLE", null)
+        while(cursor.moveToNext()){
+            eventosList.add(cursor.getString(cursor.getColumnIndexOrThrow(EVENTOS_COLUMN)))
+        }
+        return eventosList
+    }
+
 
     override fun updatePet(pet: Pet) = petDatabase.update(
         PET_TABLE,
@@ -110,11 +112,7 @@ class PetSqliteImpl(context: Context) : PetDAO {
             put(TIPO_COLUMN, tipo)
             put(COR_COLUMN, cor)
             put(PORTE_COLUMN, porte)
-            put(ULTIMA_DATA_PETSHOP_COLUMN, ultimaIdaPetShop)
-            put(ULTIMA_DATA_VETERINARIO_COLUMN, ultimaIdaVeterinario)
-            put(ULTIMA_DATA_VACINA_COLUMN, ultimaIdaVacina)
-            put(TELEFONE_CONSULTORIO_COLUMN, telefoneConsultorio)
-            put(SITE_CONSULTORIO_COLUMN, siteConsultorio)
+
         }
     }
 
@@ -125,11 +123,8 @@ class PetSqliteImpl(context: Context) : PetDAO {
             getString(getColumnIndexOrThrow(TIPO_COLUMN)),
             getString(getColumnIndexOrThrow(COR_COLUMN)),
             getString(getColumnIndexOrThrow(PORTE_COLUMN)),
-            getString(getColumnIndexOrThrow(ULTIMA_DATA_PETSHOP_COLUMN)),
-            getString(getColumnIndexOrThrow(ULTIMA_DATA_VETERINARIO_COLUMN)),
-            getString(getColumnIndexOrThrow(ULTIMA_DATA_VACINA_COLUMN)),
-            getString(getColumnIndexOrThrow(TELEFONE_CONSULTORIO_COLUMN)),
-            getString(getColumnIndexOrThrow(SITE_CONSULTORIO_COLUMN))
+            mutableListOf(getColumnIndexOrThrow(EVENTOS_COLUMN).toString()),
+
         )
     }
 }

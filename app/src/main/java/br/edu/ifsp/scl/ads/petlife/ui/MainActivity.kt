@@ -1,13 +1,7 @@
 package br.edu.ifsp.scl.ads.petlife.ui
 
+import EventoAdapter
 import android.content.Intent
-import android.content.Intent.ACTION_CALL
-import android.content.Intent.ACTION_CHOOSER
-import android.content.Intent.ACTION_DIAL
-import android.content.Intent.ACTION_VIEW
-import android.content.Intent.EXTRA_INTENT
-import android.content.Intent.EXTRA_TITLE
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.ContextMenu
@@ -20,28 +14,33 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import br.edu.ifsp.scl.ads.eventolife.ui.AdicionarEventoActivity
 import br.edu.ifsp.scl.ads.petlife.R
 import br.edu.ifsp.scl.ads.petlife.controller.MainController
 import br.edu.ifsp.scl.ads.petlife.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.ads.petlife.model.Constant.PET
 import br.edu.ifsp.scl.ads.petlife.model.Constant.VIEW_MODE
+import br.edu.ifsp.scl.ads.petlife.model.Evento
 import br.edu.ifsp.scl.ads.petlife.model.Pet
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var amb: ActivityMainBinding
-    private val petsList = mutableListOf<Pet>()
+
     private lateinit var adicionarPetLauncher : ActivityResultLauncher<Intent>
-    private lateinit var editarIdaVeterinarioLauncher: ActivityResultLauncher<Intent>
-    private lateinit var editarIdaPetshopLauncher: ActivityResultLauncher<Intent>
-    private lateinit var editarIdaVacinaLauncher: ActivityResultLauncher<Intent>
+    private lateinit var adicionarEventoLauncher : ActivityResultLauncher<Intent>
+    private lateinit var editarEventosLauncher: ActivityResultLauncher<Intent>
     private lateinit var editarPetLauncher: ActivityResultLauncher<Intent>
-    private lateinit var ligarAoConsultorioLauncher: ActivityResultLauncher<Intent>
-    private lateinit var abrirSiteConsultorioLauncher: ActivityResultLauncher<Intent>
+
+    private val petsList = mutableListOf<Pet>()
+    private val eventsList = mutableListOf<Evento>()
 
     private val petAdapter: PetAdapter by lazy{
         PetAdapter(this,petsList)
+    }
+    private val eventoAdapter: EventoAdapter by lazy{
+        EventoAdapter(this,eventsList)
     }
     private val mainController: MainController by lazy{
         MainController(this)
@@ -55,13 +54,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
-
         amb.toolbarIn.toolbar.let {
             it.subtitle = getString(R.string.pet_list)
             setSupportActionBar(it)
         }
 
         fillPetList()
+        fillEventoList()
 
         amb.petsLV.adapter = petAdapter
 
@@ -88,24 +87,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        editarIdaVeterinarioLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult())
-        { result ->
+        adicionarEventoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getParcelableExtra<Pet>(PET)
+                val evento = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getParcelableExtra<Evento>("EVENTO")
+                } else {
+                    result.data?.getParcelableExtra("EVENTO", Evento::class.java)
                 }
-                else {
-                    result.data?.getParcelableExtra(PET, Pet::class.java)
-                }
-                if (pet != null) {
-                    atualizarPet(pet)
+                if (evento != null) {
+                    adicionarEvento(evento)
                 }
             }
-
         }
-        editarIdaPetshopLauncher = registerForActivityResult(
+
+        editarEventosLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ){ result ->
             if (result.resultCode == RESULT_OK) {
@@ -120,21 +115,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        editarIdaVacinaLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getParcelableExtra<Pet>(PET)
-                }
-                else {
-                    result.data?.getParcelableExtra(PET, Pet::class.java)
-                }
-                if (pet != null) {
-                    atualizarPet(pet)
-                }
-            }
-        }
+
         editarPetLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()
         ){ result ->
             if (result.resultCode == RESULT_OK) {
@@ -152,36 +133,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        ligarAoConsultorioLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ){result ->
-            if (result.resultCode == RESULT_OK) {
-                if (result.resultCode == RESULT_OK) {
-                    val position = result.data?.getIntExtra("position", -1)
-
-                    if (position != null) {
-                        discarPetConsultorio(position)
-                    }
-                }
-            }
-        }
-        abrirSiteConsultorioLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val position = result.data?.getIntExtra("position", -1)
-                val pet = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getParcelableExtra<Pet>(PET)
-                } else {
-                    result.data?.getParcelableExtra(PET, Pet::class.java)
-                }
-                if (pet != null && position != null) {
-                    abrirSiteConsultorio(position)
-                }
-            }
-        }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -191,6 +143,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
         R.id.addPetMi -> {
             adicionarPetLauncher.launch(Intent(this, AdicionarPetActivity::class.java)
+                .putExtra(VIEW_MODE,false))
+            startActivity(intent)
+            true
+        }
+        R.id.addEventoMi -> {
+            adicionarEventoLauncher.launch(Intent(this, AdicionarEventoActivity::class.java)
                 .putExtra(VIEW_MODE,false))
             startActivity(intent)
             true
@@ -226,47 +184,6 @@ class MainActivity : AppCompatActivity() {
                 petAdapter.notifyDataSetChanged()
                 true
             }
-            R.id.DiscarTelefoneconsultorioMi -> {
-                Intent(this, LigarAoConsultorioActivity::class.java).apply {
-                    putExtra("position",position)
-                    ligarAoConsultorioLauncher.launch(this)
-                }
-                true
-            }
-            R.id.AbrirSiteConsultorioMi->{
-                Intent(this, AbrirSiteConsultorioActivity::class.java).apply {
-                    putExtra("position",position)
-                    abrirSiteConsultorioLauncher.launch(this)
-                }
-                true
-            }
-            R.id.EditarUltimaIdaAoPetshopMI ->{
-                Intent(this, EditarIdaAoPetshopActivity::class.java).apply {
-                    putExtra(PET, petsList[position])
-                    putExtra("position",position)
-                    putExtra(VIEW_MODE, false)
-                    editarPetLauncher.launch(this)
-                }
-                true
-            }
-            R.id.EditarUltimaIdaParaVacinaMi ->{
-                Intent(this,EditarIdaParaVacinaActivity::class.java).apply {
-                    putExtra(PET, petsList[position])
-                    putExtra("position",position)
-                    putExtra(VIEW_MODE, false)
-                    editarPetLauncher.launch(this)
-                }
-                true
-            }
-            R.id.EditarUltimaIdaAoVeterinarioMi ->{
-                Intent(this,EditarIdaAoVeterinarioActivity::class.java).apply {
-                    putExtra(PET, petsList[position])
-                    putExtra("position",position)
-                    putExtra(VIEW_MODE, false)
-                    editarPetLauncher.launch(this)
-                }
-                true
-            }
 
             else -> {
                 false
@@ -284,32 +201,22 @@ class MainActivity : AppCompatActivity() {
                 petsList[position] = receivedPet
                 mainController.modifyPet(receivedPet)
             }
-            petAdapter.notifyDataSetChanged()
+            eventoAdapter.notifyDataSetChanged()
         }
     }
-
-
-    private fun editarIdaVeterinario() {
-        //val intent = Intent(this, EditarIdaAoVeterinarioActivity::class.java)
-        //editarIdaVeterinarioLauncher.launch(intent)
+    private fun adicionarEvento(evento: Evento?) {
+        evento?.let { receivedEvento ->
+            val position = eventsList.indexOfFirst { it.data == receivedEvento.data }
+            if (position == -1) {
+                eventsList.add(receivedEvento)
+                mainController.insertEvento(receivedEvento)
+            } else {
+                eventsList[position] = receivedEvento
+                mainController.modifyEvento(receivedEvento)
+            }
+            eventoAdapter.notifyDataSetChanged()
+        }
     }
-
-    //private fun editarIdaPetshop(){
-      //  val intent = Intent(this, EditarIdaAoPetshopActivity::class.java)
-        //editarIdaPetshopLauncher.launch(intent)
-    //}
-    //private fun atualizarDataPetshop(nomePet: String, novaData: String) {
-       // val pet = petsList.find { it.nome == nomePet }
-        //pet?.let {
-          //  it.ultimaIdaPetShop = novaData
-            //Atualizar no banco
-            //Toast.makeText(this, "Data de ida ao Petshop atualizada!", Toast.LENGTH_SHORT).show()
-        //} ?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
-    //}
-    //private fun editarIdaVacina(){
-      //  val intent = Intent(this, EditarIdaParaVacinaActivity::class.java)
-        //editarIdaVacinaLauncher.launch(intent)
-    //}
 
     private fun atualizarPet(pet:Pet){
         pet?.let {
@@ -321,37 +228,21 @@ class MainActivity : AppCompatActivity() {
         }?: Toast.makeText(this, "Pet não encontrado!", Toast.LENGTH_SHORT).show()
     }
 
-    private fun discarPetConsultorio(position: Int){
-
-        val pet = petsList[position]
-
-        pet?.let {
-            Uri.parse("tel: ${pet.telefoneConsultorio}").let {
-                Intent(if (false) ACTION_CALL else ACTION_DIAL).apply {
-                    data = it
-                    startActivity(this)
-                }
-            }
-        }
-    }
-    private fun abrirSiteConsultorio(position: Int){
-        val pet = petsList[position]
-        pet?.let {
-            Uri.parse(pet.siteConsultorio).let { url ->
-                Intent(ACTION_VIEW, url).let { navegadorIntent ->
-                    val escolherAppIntent = Intent(ACTION_CHOOSER)
-                    escolherAppIntent.putExtra(EXTRA_TITLE, "Escolha seu navegador")
-                    escolherAppIntent.putExtra(EXTRA_INTENT, navegadorIntent)
-                    startActivity(escolherAppIntent)
-                }
-            }
-        }
-    }
     private fun fillPetList(){
         Thread{
             runOnUiThread{
                 petsList.clear()
                 petsList.addAll(mainController.getPets())
+                petAdapter.notifyDataSetChanged()
+            }
+        }.start()
+    }
+
+    private fun fillEventoList(){
+        Thread{
+            runOnUiThread{
+                eventsList.clear()
+                eventsList.addAll(mainController.getEventos())
                 petAdapter.notifyDataSetChanged()
             }
         }.start()

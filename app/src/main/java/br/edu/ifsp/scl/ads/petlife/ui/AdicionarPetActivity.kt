@@ -34,21 +34,13 @@ class AdicionarPetActivity :  AppCompatActivity() {
                     tipoEt.setText(tipo)
                     corEt.setText(cor)
                     porteEt.setText(porte)
-                    ultimaIdaPetShopEt.setText(ultimaIdaPetShop)
-                    ultimaIdaVeterinarioEt.setText(ultimaIdaVeterinario)
-                    ultimaIdaVacinaEt.setText(ultimaIdaVacina)
-                    telefoneConsultorioEt.setText(telefoneConsultorio)
-                    siteConsultorioEt.setText(siteConsultorio)
+
 
                     dataNascimentoEt.isEnabled =   !viewMode
                     tipoEt.isEnabled = !viewMode
                     corEt.isEnabled = !viewMode
                     porteEt.isEnabled = !viewMode
-                    ultimaIdaPetShopEt.isEnabled = !viewMode
-                    ultimaIdaVeterinarioEt.isEnabled = !viewMode
-                    ultimaIdaVacinaEt.isEnabled = !viewMode
-                    telefoneConsultorioEt.isEnabled = !viewMode
-                    siteConsultorioEt.isEnabled = !viewMode
+
                     salvarPetBt.visibility = if (viewMode) GONE else VISIBLE
                 }
             }
@@ -71,11 +63,7 @@ class AdicionarPetActivity :  AppCompatActivity() {
                     tipoEt.text.toString(),
                     corEt.text.toString(),
                     porteEt.text.toString(),
-                    ultimaIdaPetShopEt.text.toString(),
-                    ultimaIdaVeterinarioEt.text.toString(),
-                    ultimaIdaVacinaEt.text.toString(),
-                    telefoneConsultorioEt.text.toString(),
-                    siteConsultorioEt.text.toString()
+
                 ).let { pet ->
                     Intent().apply {
                         putExtra(PET, pet)

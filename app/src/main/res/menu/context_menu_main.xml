@@ -7,18 +7,7 @@
         android:id="@+id/excluirPetMi"
         android:title="Excluir Pet"/>
     <item
-        android:id="@+id/EditarUltimaIdaAoVeterinarioMi"
-        android:title="Editar última ida ao veterinario"/>
-    <item
-        android:id="@+id/EditarUltimaIdaAoPetshopMI"
-        android:title="Editar última ida ao petshop"/>
-    <item
-        android:id="@+id/EditarUltimaIdaParaVacinaMi"
-        android:title="Editar última ida para vacina"/>
-    <item
-        android:id="@+id/DiscarTelefoneconsultorioMi"
-        android:title="Discar telefone do consultorio"/>
-    <item
-        android:id="@+id/AbrirSiteConsultorioMi"
-        android:title="Abrir site do consultorio"/>
+        android:id="@+id/EditarEventosMi"
+        android:title="Acessar Lista de eventos"/>
+
 </menu>

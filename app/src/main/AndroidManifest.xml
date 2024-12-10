@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.EditarIdaAoVeterinarioActivity" />
-        <activity android:name=".ui.EditarIdaAoPetshopActivity" />
+        <activity android:name=".ui.EditarEventosActivity" />
         <activity android:name=".ui.EditarIdaParaVacinaActivity" />
         <activity android:name=".ui.EditarPetActivity"/>
         <activity android:name=".ui.LigarAoConsultorioActivity"/>

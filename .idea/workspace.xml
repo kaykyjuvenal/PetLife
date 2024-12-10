@@ -10,12 +10,17 @@
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_evento.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml">
         <config>
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_editar_evento.xml">
         <config>
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
@@ -41,6 +46,16 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_mostrar_eventos.xml">
+        <config>
+          <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/tile_events.xml">
         <config>
           <theme>@style/Theme.PetLifeKaykyFlavioJuvenal</theme>
         </config>
@@ -71,20 +86,36 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: finalize pet addition and edit functionality">
+    <list default="true" id="49dbdce0-f409-4ef7-b868-fdb244582a23" name="Changes" comment="feat: finished work">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Evento.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/EventoSqliteImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/EventosDao.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarEventosActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_evento.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_mostrar_eventos.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/tile_events.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/controller/MainController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/controller/MainController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/Pet.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetDAO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetSqliteImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/model/PetSqliteImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AbrirSiteConsultorioActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/AdicionarPetActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoPetshopActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarEventosActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaAoVeterinarioActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarIdaParaVacinaActivity.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/EditarPetActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/LigarAoConsultorioActivity.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/edu/ifsp/scl/ads/petlife/ui/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_abrir_site_consultorio.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_adicionar_pet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_petshop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_evento.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_ao_veterinario.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_editar_ida_para_vacina.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ligar_ao_consultorio.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/context_menu_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,8 +176,8 @@
         <option value="Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Object" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -322,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733767155523</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: finished work">
+      <option name="closed" value="true" />
+      <created>1733777648225</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733777648225</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -331,6 +370,7 @@
     <MESSAGE value="feat: implement SQL with table creation and Pet DAO&#10;&#10;- Added SQL implementation for database integration.&#10;- Created a table structure for storing pet data.&#10;- Developed the Data Access Object (DAO) for handling pet-related database operations." />
     <MESSAGE value="feat: implement AdicionarPetActivity" />
     <MESSAGE value="feat: finalize pet addition and edit functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: finalize pet addition and edit functionality" />
+    <MESSAGE value="feat: finished work" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: finished work" />
   </component>
 </project>

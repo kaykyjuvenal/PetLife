@@ -6,4 +6,10 @@
         android:title="@string/add_pet"
         android:icon="@drawable/add_pet_icon"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/addEventoMi"
+        android:title="@string/add_pet"
+        android:icon="@drawable/add_pet_icon"
+        app:showAsAction="always"/>
 </menu>

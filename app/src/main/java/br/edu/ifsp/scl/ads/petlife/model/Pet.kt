@@ -10,9 +10,5 @@ data class Pet(
     val tipo: String = "",
     val cor: String = "",
     val porte: String = "",
-    val ultimaIdaPetShop: String = "",
-    val ultimaIdaVeterinario: String = "",
-    val ultimaIdaVacina: String = "",
-    val telefoneConsultorio: String = "",
-    val siteConsultorio: String = ""
+    val eventos: MutableList<String> = mutableListOf()
 ): Parcelable
